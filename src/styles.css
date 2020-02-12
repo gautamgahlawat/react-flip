@@ -1,8 +1,73 @@
-/* add css styles here (optional) */
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
 
-.test {
-  display: inline-block;
-  margin: 2em auto;
-  border: 2px solid #000;
-  font-size: 2em;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 20px;
+}
+
+/* entire container, keeps perspective */
+.flip-container {
+  perspective: 1500px;
+  /* For Firefox <= 15 to apply perspective. Without these two lines transformation will be flat.
+    This fix, however, doesn’t apply if we put overflow property on the element being fixed.
+    */
+  -moz-transform: perspective(1500px);
+  -moz-transform-style: preserve-3d;
+}
+
+/* flip the pane when hovered */
+.flip-container:hover .flipper,
+.flip-container.hover .flipper {
+  transform: rotateY(180deg);
+}
+
+.flip-container,
+.front,
+.back {
+  width: 320px;
+  height: 480px;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front,
+.back {
+  backface-visibility: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+  background-color: grey;
+
+  /*Fix for Chrome, version <= 22*/
+  -webkit-transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
+  background-color: aliceblue;
 }

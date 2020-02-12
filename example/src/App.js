@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import ExampleComponent from 'react-flip'
+import ReactFlip from "react-flip";
 
 export default class App extends Component {
-  render () {
+  render() {
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <ReactFlip front={'front side here'} back={'back is on the back'} action={'click'}/>
       </div>
-    )
+    );
   }
 }
